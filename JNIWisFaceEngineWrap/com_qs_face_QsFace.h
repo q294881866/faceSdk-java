@@ -47,26 +47,7 @@ JNIEXPORT jfloat JNICALL Java_com_qs_face_QsFace_compare2Feature
 JNIEXPORT jfloat JNICALL Java_com_qs_face_QsFace_compare2Image
   (JNIEnv *, jobject, jint, jstring, jstring);
 
-/*
- * Class:     com_qs_face_QsFace
- * Method:    calculateFacePoints
- * Signature: ([BIIIIIII)Lcom/qs/face/entity/FacePointsFeatureResult;
- */
-JNIEXPORT jobject JNICALL Java_com_qs_face_QsFace_calculateFacePoints
-  (JNIEnv *, jclass, jint ,jbyteArray, jint, jint, jint, jint, jint, jint, jint);
 
-/*
- * Class:     com_qs_face_QsFace
- * Method:    antiFakeDetect
- */
-JNIEXPORT int JNICALL Java_com_qs_face_QsFace_antiFakeDetect
-  (JNIEnv *, jobject, jint, jbyteArray, jint, jint, jint,jint);
-
-JNIEXPORT jobject JNICALL Java_com_qs_face_QsFace_fatigueDetectAPI
-  (JNIEnv *, jobject, jint, jbyteArray, jint, jint, jint);
-
-JNIEXPORT void JNICALL Java_com_qs_face_QsFace_setFatigueDetectCountAPI
-  (JNIEnv *, jobject, jint,jint,jint,jint);
 
 #ifdef __cplusplus
 }
