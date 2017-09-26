@@ -42,8 +42,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>D:\Program Files\Java\jdk1.8.0_91\include\win32;D:\work\project\lib\opencv\include;D:\work\project\cplus\projects\JNIWisFaceEngineWrap\include;D:\Program Files\Java\jdk1.8.0_91\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\work\project\lib\opencv\lib\release;D:\work\project\cplus\projects\JNIWisFaceEngineWrap\lib\x86_32;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(JAVA_HOME)\include\win32;D:\work\project\lib\opencv\include;$(SolutionDir)include;$(JAVA_HOME)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\work\project\lib\opencv\lib\release;$(SolutionDir)lib\x86_32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
