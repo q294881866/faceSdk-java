@@ -2,3 +2,5 @@
 /ipch
 /JNIWisFaceEngineWrap/Release
 /Release
+/JNIWisFaceEngineWrap/*.user
+/JNIWisFaceEngineWrap/x64
