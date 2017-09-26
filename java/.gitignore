@@ -1,0 +1,8 @@
+/src/com/qs/face/entity/*.class
+/bin/com/qs/face/*.class
+/bin
+/.idea/encodings.xml
+/.idea
+/QsFaceV3Java.iml
+/src/META-INF
+/classes
