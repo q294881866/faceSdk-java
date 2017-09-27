@@ -1,17 +1,20 @@
 # face-v4-java-sdk
 version4 java sdk  
 
-##java Ä¿Â¼´æ·Åjava SDKµÄÔ´Âë  
-##jni ´æ·Åjavaµ÷ÓÃC++ SDKµÄjniÔ´Âë 
+##java ç›®å½•å­˜æ”¾java SDKçš„æºç   
+##jni å­˜æ”¾javaè°ƒç”¨C++ SDKçš„jniæºç  
 
-#java°æ±¾
+#javaç‰ˆæœ¬
 java version "1.8.0_111"  
 Java(TM) SE Runtime Environment (build 1.8.0_111-b14)  
 Java HotSpot(TM) 64-Bit Server VM (build 25.111-b14, mixed mode)  
 
-jniÊÇC++°ü×°²ã£¬ÒªÇø·Ö32Î»»¹ÊÇ64Î»¡£  
-32Î»SDK: x86_32\JNIWisFaceEngineWrap.dll
-64Î»SDK: x86_64\JNIWisFaceEngineWrap.dll
-java SDK: com.qs.face.jar  
+jniæ˜¯C++åŒ…è£…å±‚ï¼Œè¦åŒºåˆ†32ä½è¿˜æ˜¯64ä½ã€‚   
+32ä½SDK: x86_32\JNIWisFaceEngineWrap.dll  
+64ä½SDK: x86_64\JNIWisFaceEngineWrap.dll  
+java SDK: com.qs.face.jar    
 
-LicenseÎÄ¼şĞèÒª·ÅÔÚ java.exeµÄ¸ùÄ¿Â¼ÏÂ¡£
+Licenseæ–‡ä»¶éœ€è¦æ”¾åœ¨ java.exeçš„æ ¹ç›®å½•ä¸‹ã€‚  
+
+
+ 
