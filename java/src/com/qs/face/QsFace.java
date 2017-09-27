@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class QsFace {
 
-	static String JNI_LIB_PATH = "WisFaceEngineWrap";
+	static String JNI_LIB_PATH = "JNIWisFaceEngineWrap.dll";
 
 	static {
 		System.loadLibrary(JNI_LIB_PATH);// 后面使用C/C++编写的JAVA能直接调用的库
