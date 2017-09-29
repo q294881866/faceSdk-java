@@ -14,6 +14,9 @@ jni是C++包装层，要区分32位还是64位。
 64位SDK: x86_64\JNIWisFaceEngineWrap.dll  
 java SDK: com.qs.face.jar    
 
+
+#注意：将C++的SDK目录加入系统Path目录
+
 License文件需要放在 java.exe的根目录下。  
 
 
