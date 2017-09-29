@@ -1,10 +1,10 @@
-# face-v4-java-sdk
+# face-v4-java-sdk,
 version4 java sdk  
 
-# java 目录存放java SDK的源码  
-# jni 存放java调用C++ SDK的jni源码 
+## java 目录存放java SDK的源码  
+## jni 存放java调用C++ SDK的jni源码 
 
-# java版本
+## java版本
 java version "1.8.0_111"  
 Java(TM) SE Runtime Environment (build 1.8.0_111-b14)  
 Java HotSpot(TM) 64-Bit Server VM (build 25.111-b14, mixed mode)  
