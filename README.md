@@ -25,4 +25,5 @@ License文件需要放在 java.exe的根目录下。
 如果您使用的是linux系统，java的代码基本不用改变，但是需要自己编译jni目录下的c++代码，将本地c++的sdk libWisFaceEngineWrapV4.so 包装成jni 供java调用
 
 
- 
+## 技术支持
+QQ： 2843028512
