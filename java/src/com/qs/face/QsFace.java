@@ -1,37 +1,25 @@
 package com.qs.face;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 import com.qs.face.entity.FaceModel;
 import com.qs.face.entity.FacePointsFeatureResult;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
 /**
  * Created by mazhi on 2017/6/9.
+ * Modified by Gavin 2017/09/29
  */
 public class QsFace {
 
-	static String JNI_LIB_PATH = "JNIWisFaceEngineWrap.dll";
-
-	static {
-		System.loadLibrary(JNI_LIB_PATH);// 后面使用C/C++编写的JAVA能直接调用的库
+	static String JNI_LIB_PATH = "JNIWisFaceEngineWrap";
+	static{
+		System.loadLibrary(JNI_LIB_PATH);
 	}
-
     public QsFace() {
-//        setFatigueDetectCountAPI(fatigueDetectConfig.fatigueDetectCount,
-//                fatigueDetectConfig.eyeThresold,fatigueDetectConfig.mouthThresold);
     }
-
-//    public QsFace(com.face.base.entity.FatigueDetectConfig fatigueDetectConfig)
-//    {
-//        this.fatigueDetectConfig=fatigueDetectConfig;
-//
-//    }
-
-//    private com.face.base.entity.FatigueDetectConfig fatigueDetectConfig=new
-//            com.face.base.entity.FatigueDetectConfig();
-
     private native int createEngine();
 
 	private native void freeEngine(int faceEngine);

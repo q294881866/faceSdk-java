@@ -10,6 +10,7 @@ import java.io.IOException;
 
 /**
  * Created by mazhi on 2017/6/9.
+ * Modified by Gavin 2017/09/29
  */
 public class Util {
 
