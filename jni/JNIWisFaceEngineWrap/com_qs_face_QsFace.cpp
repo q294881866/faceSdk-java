@@ -7,20 +7,20 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <opencv\cxcore.h>
+#include <opencv/cxcore.h>
 #define FILEPATH_MAX (80)
-
-#pragma comment(lib, "vfw32.lib" ) 
-#pragma comment(lib, "IlmImf.lib" )   
-#pragma comment(lib, "libjasper.lib" )  
-#pragma comment(lib, "libjpeg.lib" )  
-#pragma comment(lib, "libpng.lib" )  
-#pragma comment(lib, "libtiff.lib" ) 
-#pragma comment(lib, "zlib.lib" ) 
-#pragma comment(lib, "opencv_core249.lib" )   
-#pragma comment(lib, "opencv_objdetect249.lib" )  
-#pragma comment(lib, "opencv_highgui249.lib" )  
-#pragma comment(lib, "opencv_imgproc249.lib" ) 
+//
+//#pragma comment(lib, "vfw32.lib" ) 
+//#pragma comment(lib, "IlmImf.lib" )   
+//#pragma comment(lib, "libjasper.lib" )  
+//#pragma comment(lib, "libjpeg.lib" )  
+//#pragma comment(lib, "libpng.lib" )  
+//#pragma comment(lib, "libtiff.lib" ) 
+//#pragma comment(lib, "zlib.lib" ) 
+//#pragma comment(lib, "opencv_core249.lib" )   
+//#pragma comment(lib, "opencv_objdetect249.lib" )  
+//#pragma comment(lib, "opencv_highgui249.lib" )  
+//#pragma comment(lib, "opencv_imgproc249.lib" ) 
 
 using namespace std;
 using namespace cv;
