@@ -4,6 +4,7 @@
 ## 目录结构 
 java 目录存放java SDK的源码  
 jni 存放java调用C++ SDK的jni源码 
+JavaApi 新的不需要依赖jni代码的java API 源码
 
 ## java版本
 java version "1.8.0_111"  
