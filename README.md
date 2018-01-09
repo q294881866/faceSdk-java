@@ -1,11 +1,12 @@
-![输入图片说明](http://www.qiansou.cn/Scripts/img/lmxt-1bi1.jpg "在这里输入图片标题")  
+﻿![输入图片说明](http://www.qiansou.cn/Scripts/img/lmxt-1bi1.jpg "在这里输入图片标题")  
 # Version 4.0
 千搜科技第四代人脸识别引擎java接口 
 
 ## 目录结构 
-java 目录存放java SDK的源码  
-jni 存放java调用C++ SDK的jni源码 
-JavaApi 新的不需要依赖jni代码的java API 源码
+> 提供基于jni和jna两种版本的java SDK，使用者根据自身情况选择其中一种API即可
+1. jni 存放java调用C++ SDK的jni源码 
+2. jna 新的不需要依赖jni代码的java API 源码(maven工程)
+* 建议直接引入jna的工程，根据说明即可 不依赖其它包使用
 
 ## java版本
 java version "1.8.0_111"  
