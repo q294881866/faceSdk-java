@@ -17,6 +17,9 @@ import java.io.IOException;
  */
 public class Util {
 
+    /**
+     * 转换为BGR24字节流
+     */
     public static byte[] toBytes(BufferedImage bufferedImage) {
         if (bufferedImage != null) {
             return ((DataBufferByte) bufferedImage.getRaster().getDataBuffer()).getData();

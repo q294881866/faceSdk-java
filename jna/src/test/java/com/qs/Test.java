@@ -20,7 +20,9 @@ public class Test {
     public void imgCompareTest() throws Exception {
         long handler = QsFaceEngine.create();
         System.out.println(handler);
+        long begin = System.currentTimeMillis();
         float score = QsFaceEngine.compare2Image(handler, "1.jpg", "2.jpg");
+        System.err.println(System.currentTimeMillis() - begin);
         System.out.println("图片比较:" + score);
     }
 
@@ -37,6 +39,7 @@ public class Test {
     @org.junit.Test
     public void faceEngineTest() throws Exception {
 
+        long begin = System.currentTimeMillis();
         // 1.创建算法引擎，全局只需要做一次，比较耗时
         long handler = QsFaceEngine.create();
         System.out.println(handler);
@@ -64,6 +67,44 @@ public class Test {
         QsFaceEngine.extractFeature(handler, Util.toBytes(img2), img2.getWidth(), img2.getHeight(), img2.getWidth() * 3, f2);
         float score = QsFaceEngine.compare2Feature(handler, f1.feature, f2.feature);
         System.out.println("特征比较:" + score);
+        System.err.println(System.currentTimeMillis() - begin);
+
+    }
+
+    /**
+     * 简化标准比较API，基于字节流
+     * 
+     * @see faceEngineTest
+     */
+    @org.junit.Test
+    public void apiTest() throws Exception {
+
+        long begin = System.currentTimeMillis();
+        // 1.创建算法引擎，全局只需要做一次，比较耗时
+        long handler = QsFaceEngine.create();
+        System.out.println(handler);
+
+        // 2.读取picture字节流image
+        BufferedImage img1 = Util.toBufferedImage("1.jpg");
+        BufferedImage img2 = Util.toBufferedImage("2.jpg");
+
+        // 3.人脸检测
+        QsFace.ByReference[] face1 = QsFaceEngine.detectFaceAndFeature(//
+                handler, Util.toBytes(img1), img1.getWidth(), img1.getHeight(), img1.getWidth() * 3, 1);
+        QsFace.ByReference[] face2 = QsFaceEngine.detectFaceAndFeature(//
+                handler, Util.toBytes(img2), img2.getWidth(), img2.getHeight(), img2.getWidth() * 3, 1);
+
+
+        // 4.特征并比较
+        for (int i = 0; i < face1.length; i++) {
+            ByReference f1 = face1[i];
+            for (int j = 0; j < face2.length; j++) {
+                ByReference f2 = face2[j];
+                float score = QsFaceEngine.compare2Feature(handler, f1.feature, f2.feature);
+                System.err.println(System.currentTimeMillis() - begin);
+                System.out.println("特征比较:" + score);
+            }
+        }
 
     }
 

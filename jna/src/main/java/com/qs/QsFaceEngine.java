@@ -6,6 +6,7 @@ import org.opencv.core.MatOfRect;
 import org.opencv.core.Rect;
 import org.opencv.objdetect.CascadeClassifier;
 
+import com.qs.QsFaceEngine.QsFace;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 import com.sun.jna.Structure;
@@ -73,6 +74,33 @@ public class QsFaceEngine {
      */
     public static int detectFaces(long handler, byte[] imgBuff, int width, int height, int widthstep, QsFace[] faces, int maxCount) {
         return INSTANCE.qs_Wis_DetectFaces(handler, imgBuff, width, height, widthstep, faces, maxCount);
+    }
+
+    /**
+     * 检测并提取人脸
+     * @param engine qs_Wis_Create()返回的人脸引擎句柄
+     * @param image 照片imgBgr24
+     * @param width 图像宽度
+     * @param height 图像高度
+     * @param widthstep widthstep是存储一行图像所占的字节（相邻两行起点指针的差值）
+     * @param faces 返回的人脸位置,size = 数量maxCount
+     * @param maxCount 最大检测人脸个数
+     * @return 包括人脸姿态、性别、特征的人脸数组
+     */
+    public static QsFace.ByReference[] detectFaceAndFeature(long handler, byte[] imgBuff, int width, int height, int widthstep,
+            int maxFaceNum) {
+        // 检测人脸
+        QsFace[] faces = new QsFace[maxFaceNum];
+        QsFace.ByReference[] models = new QsFace.ByReference[maxFaceNum];
+        int faceNum = INSTANCE.qs_Wis_DetectFaces(handler, imgBuff, width, height, widthstep, faces, maxFaceNum);
+        if (faceNum < 1) return null;
+
+        // 提取特征
+        for (int i = 0; i < models.length; i++) {
+            models[i] = faces[i].asReference();
+            INSTANCE.qs_Wis_ExtractFeature(handler, imgBuff, width, height, widthstep, models[i]);
+        }
+        return models;
     }
 
 
