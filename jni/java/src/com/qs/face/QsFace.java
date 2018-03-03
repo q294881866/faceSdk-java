@@ -95,7 +95,7 @@ public class QsFace {
 
 	public FaceModel[] detectFacesFeature(BufferedImage bufferedImage, int maxFaceCount) {
 		if (bufferedImage != null) {
-			return detectFacesFeature(Util.getBgrDataFromBufferedImage(bufferedImage), bufferedImage.getWidth(),
+			return detectFacesFeature(Util.toBytes(bufferedImage), bufferedImage.getWidth(),
 					bufferedImage.getHeight(), bufferedImage.getWidth() * 3, maxFaceCount);
 		}
 		return null;
@@ -125,7 +125,7 @@ public class QsFace {
     public int antiFake(BufferedImage bufferedImage,int facePoseType)
     {
         if (bufferedImage!=null)
-            return antiFake(Util.getBgrDataFromBufferedImage(bufferedImage),bufferedImage.getWidth(),
+            return antiFake(Util.toBytes(bufferedImage),bufferedImage.getWidth(),
                     bufferedImage.getHeight(),bufferedImage.getWidth()*3,facePoseType);
         return antiErrorResult;
     }
