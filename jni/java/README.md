@@ -12,7 +12,7 @@
 > 本例子用32位版本，64位版本相同
 
 * license文件保存在 JAVA\_HOME\bin （32bit）目录下，即可执行文件java（.exe）同一目录
-* 将[dll](./x86_32)以及[jna dll](jna/x86_32)目录下所有文件，放到执行本示例的32位java.exe对应目录(./bin)
+* 将[dll](./x86_32)以及[jna dll](/jna/x86_32)目录下所有文件，放到执行本示例的32位java.exe对应目录(./bin)
 * [jar](./x86_32/com.qs.face.jar) 文件夹提供了直接可以导入的jar，
 * demo Test
 
