@@ -13,7 +13,7 @@ import com.sun.jna.Structure;
  */
 public class QsFaceEngine {
 
-    public static QsFaceLibrary INSTANCE =
+    private static final QsFaceLibrary INSTANCE =
             (QsFaceLibrary) Native.loadLibrary("WisFaceEngineWrapV4", QsFaceLibrary.class);
 
 
