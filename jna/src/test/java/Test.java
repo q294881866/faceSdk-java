@@ -1,6 +1,12 @@
 
+import static org.junit.Assert.*;
+
 import java.awt.image.BufferedImage;
 
+import org.opencv.core.Mat;
+import org.opencv.imgcodecs.Imgcodecs;
+
+import com.qs.EyeDetect;
 import com.qs.QsFaceEngine;
 import com.qs.Util;
 import com.qs.QsFaceEngine.QsFace;
@@ -8,8 +14,9 @@ import com.qs.QsFaceEngine.QsFace.ByReference;
 
 
 public class Test {
-
-    public static void main(String[] args) throws Exception {
+    
+    @org.junit.Test
+    public void faceEngineTest() throws Exception {
 
         long handler = QsFaceEngine.create();
         float score;
@@ -46,5 +53,6 @@ public class Test {
         System.out.println("特征比较:" + score);
 
     }
+    
 
 }
