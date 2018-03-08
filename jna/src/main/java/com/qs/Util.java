@@ -3,8 +3,8 @@ package com.qs;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
-import org.opencv.core.MatOfByte;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -34,8 +34,28 @@ public class Util {
 
     }
 
-    public static Mat toMat(byte[] bytes) {
-        return new MatOfByte(bytes).clone();
+    public static BufferedImage toBufferedImage(Mat in) {
+        byte[] data = new byte[in.width() * in.height() * (int) in.elemSize()];
+        in.get(0, 0, data);
+
+        int  type = (in.channels() == 1) ? BufferedImage.TYPE_BYTE_GRAY : BufferedImage.TYPE_3BYTE_BGR;
+        BufferedImage out = new BufferedImage(in.width(), in.height(), type);
+
+        out.getRaster().setDataElements(0, 0, in.width(), in.height(), data);
+        return out;
+    }
+
+    public static Mat toMat(BufferedImage bi) {
+        Mat mat = new Mat(bi.getHeight(), bi.getWidth(), CvType.CV_8UC3);
+        byte[] data = ((DataBufferByte) bi.getRaster().getDataBuffer()).getData();
+        mat.put(0, 0, data);
+        return mat;
+    }
+    
+    public static Mat toMat(byte[] imgBuff, int width, int height) {
+        Mat mat = new Mat(height, width, CvType.CV_8UC3);
+        mat.put(0, 0, imgBuff);
+        return mat;
     }
 
     public static BufferedImage toBufferedImage(Image image) {

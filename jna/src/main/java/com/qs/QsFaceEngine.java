@@ -1,5 +1,11 @@
 package com.qs;
 
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfRect;
+import org.opencv.core.Rect;
+import org.opencv.objdetect.CascadeClassifier;
+
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 import com.sun.jna.Structure;
@@ -13,8 +19,40 @@ import com.sun.jna.Structure;
  */
 public class QsFaceEngine {
 
-    private static final QsFaceLibrary INSTANCE =
-            (QsFaceLibrary) Native.loadLibrary("WisFaceEngineWrapV4", QsFaceLibrary.class);
+    private static final QsFaceLibrary INSTANCE;
+    private static final CascadeClassifier EYE_DETECTOR;
+
+    static {
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        EYE_DETECTOR = new CascadeClassifier("haarcascades/haarcascade_eye.xml");
+        INSTANCE = (QsFaceLibrary) Native.loadLibrary("WisFaceEngineWrapV4", QsFaceLibrary.class);
+    }
+
+    /**
+     * 判断是否带眼镜，非人脸照片返回false
+     */
+    public static boolean detectGlasses(long handler, byte[] imgBuff, int width, int height, int widthstep) {
+        QsFace[] faces = new QsFace[1];
+        int faceNum = QsFaceEngine.detectFaces(handler, imgBuff, width, height, widthstep, faces, 1);
+        // 判断是否戴眼镜
+        if (faceNum > 0) {
+            Rect faceRect = toRect(faces[0].rect);
+            MatOfRect eyeRect = new MatOfRect(faceRect);
+
+            Mat dest = Util.toMat(imgBuff, width, height);
+            EYE_DETECTOR.detectMultiScale(dest, eyeRect);
+
+            System.out.println(eyeRect.toArray().length);
+            return eyeRect.toArray().length < 2;
+        }
+
+        return false;
+    }
+
+
+    private static Rect toRect(QsRect rect) {
+        return new Rect(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top);
+    }
 
 
     /**
@@ -39,8 +77,7 @@ public class QsFaceEngine {
      * @param maxCount 最大检测人脸个数
      * @return 检测到的人脸个数
      */
-    public static int detectFaces(long handler, byte[] imgBuff, int width, int height, int widthstep,
-            QsFace[] faces, int maxCount) {
+    public static int detectFaces(long handler, byte[] imgBuff, int width, int height, int widthstep, QsFace[] faces, int maxCount) {
         return INSTANCE.qs_Wis_DetectFaces(handler, imgBuff, width, height, widthstep, faces, maxCount);
     }
 
@@ -57,8 +94,7 @@ public class QsFaceEngine {
      * @param maxCount 最大检测人脸个数
      * @return 检测到的人脸个数
      */
-    public static int detectFacesV2(long handler, byte[] imgBuff, int width, int height, int widthstep,
-            QsFace[] faceRects, int maxCount) {
+    public static int detectFacesV2(long handler, byte[] imgBuff, int width, int height, int widthstep, QsFace[] faceRects, int maxCount) {
         return INSTANCE.qs_Wis_DetectFacesV2(handler, imgBuff, width, height, widthstep, faceRects, maxCount);
     }
 
@@ -75,10 +111,9 @@ public class QsFaceEngine {
      * @param maxCount 最大检测人脸个数
      * @return 检测到的人脸个数
      */
-    public static int detectFacesReinforce(long handler, byte[] imgBuff, int width, int height, int widthstep,
-            QsFace[] faces, int maxCount) {
-        return INSTANCE.qs_Wis_DetectFaces_Reinforce(handler, imgBuff, width, height, widthstep, faces,
-            maxCount);
+    public static int detectFacesReinforce(long handler, byte[] imgBuff, int width, int height, int widthstep, QsFace[] faces,
+            int maxCount) {
+        return INSTANCE.qs_Wis_DetectFaces_Reinforce(handler, imgBuff, width, height, widthstep, faces, maxCount);
     }
 
 
@@ -91,12 +126,10 @@ public class QsFaceEngine {
      * @param width 图像宽度
      * @param height 图像高度
      * @param widthstep widthstep是存储一行图像所占的字节（相邻两行起点指针的差值）
-     * @param face
-     *            人脸结构体，调用特征提取之前就已经有了rect即人脸框，执行特征提取成功后，该人脸的特征值会自动存储于face.feature中
+     * @param face 人脸结构体，调用特征提取之前就已经有了rect即人脸框，执行特征提取成功后，该人脸的特征值会自动存储于face.feature中
      * @return 0 success, 其他失败
      */
-    public static int extractFeature(long handler, byte[] imgBuff, int width, int height, int widthstep,
-            QsFace.ByReference face) {
+    public static int extractFeature(long handler, byte[] imgBuff, int width, int height, int widthstep, QsFace.ByReference face) {
         return INSTANCE.qs_Wis_ExtractFeature(handler, imgBuff, width, height, widthstep, face);
     }
 
@@ -135,11 +168,9 @@ public class QsFaceEngine {
         public float pitch;
         public Point[] points = new Point[POINTS_NUM];
 
-        public static class ByValue extends FacePointsModel implements Structure.ByValue {
-        }
+        public static class ByValue extends FacePointsModel implements Structure.ByValue {}
 
-        public static class ByReference extends FacePointsModel implements Structure.ByReference {
-        }
+        public static class ByReference extends FacePointsModel implements Structure.ByReference {}
 
 
         @Override
@@ -151,8 +182,7 @@ public class QsFaceEngine {
     public static class Point extends DefaultStruct {
         public int x, y;
 
-        public static class ByValue extends Point implements Structure.ByValue {
-        }
+        public static class ByValue extends Point implements Structure.ByValue {}
 
 
         @Override
@@ -167,8 +197,7 @@ public class QsFaceEngine {
         public int right; // 矩形框右下角x坐标
         public int bottom; // 矩形框右下角y坐标
 
-        public static class ByValue extends QsRect implements Structure.ByValue {
-        }
+        public static class ByValue extends QsRect implements Structure.ByValue {}
 
 
         public QsRect.ByValue asValue() {
@@ -205,9 +234,8 @@ public class QsFaceEngine {
         public int gender; // 性别
         public byte[] feature = new byte[FEATURE_SIZE]; // 人脸特征 size
 
-        public static class ByReference extends QsFace implements Structure.ByReference {
-        }
-        
+        public static class ByReference extends QsFace implements Structure.ByReference {}
+
         public QsFace.ByReference asReference() {
             ByReference ref = new ByReference();
             ref.rect = this.rect;
@@ -228,20 +256,16 @@ public class QsFaceEngine {
         long qs_Wis_Create(int tag);
 
 
-        int qs_Wis_DetectFaces(long handler, byte[] imgBuff, int width, int height, int widthstep,
-                QsFace[] faces, int maxCount);
+        int qs_Wis_DetectFaces(long handler, byte[] imgBuff, int width, int height, int widthstep, QsFace[] faces, int maxCount);
 
 
-        int qs_Wis_DetectFacesV2(long handler, byte[] imgBuff, int width, int height, int widthstep,
-                QsFace[] faceRects, int maxCount);
+        int qs_Wis_DetectFacesV2(long handler, byte[] imgBuff, int width, int height, int widthstep, QsFace[] faceRects, int maxCount);
 
 
-        int qs_Wis_DetectFaces_Reinforce(long handler, byte[] imgBuff, int width, int height, int widthstep,
-                QsFace[] faces, int maxCount);
+        int qs_Wis_DetectFaces_Reinforce(long handler, byte[] imgBuff, int width, int height, int widthstep, QsFace[] faces, int maxCount);
 
 
-        int qs_Wis_ExtractFeature(long handler, byte[] imgBuff, int width, int height, int widthstep,
-                QsFace.ByReference face);
+        int qs_Wis_ExtractFeature(long handler, byte[] imgBuff, int width, int height, int widthstep, QsFace.ByReference face);
 
 
         float qs_Wis_Compare2Feature(long handler, byte[] ptFeature1, byte[] ptFeature2);
