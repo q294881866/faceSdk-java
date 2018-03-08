@@ -31,22 +31,16 @@ public class QsFaceEngine {
     /**
      * 判断是否带眼镜，非人脸照片返回false
      */
-    public static boolean detectGlasses(long handler, byte[] imgBuff, int width, int height, int widthstep) {
-        QsFace[] faces = new QsFace[1];
-        int faceNum = QsFaceEngine.detectFaces(handler, imgBuff, width, height, widthstep, faces, 1);
-        // 判断是否戴眼镜
-        if (faceNum > 0) {
-            Rect faceRect = toRect(faces[0].rect);
-            MatOfRect eyeRect = new MatOfRect(faceRect);
+    public static boolean detectGlasses(long handler, byte[] imgBuff, int width, int height, int widthstep, QsRect rect) {
+        Rect faceRect = toRect(rect);
+        MatOfRect eyeRect = new MatOfRect(faceRect);
 
-            Mat dest = Util.toMat(imgBuff, width, height);
-            EYE_DETECTOR.detectMultiScale(dest, eyeRect);
+        Mat dest = Util.toMat(imgBuff, width, height);
+        EYE_DETECTOR.detectMultiScale(dest, eyeRect);
 
-            System.out.println(eyeRect.toArray().length);
-            return eyeRect.toArray().length < 2;
-        }
+        System.out.println(eyeRect.toArray().length);
+        return eyeRect.toArray().length < 2;
 
-        return false;
     }
 
 

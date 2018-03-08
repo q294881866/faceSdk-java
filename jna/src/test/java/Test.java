@@ -2,7 +2,6 @@
 
 import java.awt.image.BufferedImage;
 
-
 import com.qs.QsFaceEngine;
 import com.qs.Util;
 import com.qs.QsFaceEngine.QsFace;
@@ -51,13 +50,17 @@ public class Test {
         long handler = QsFaceEngine.create();
         System.out.println(handler);
 
-        BufferedImage img1 = Util.toBufferedImage("3.jpg");
-        BufferedImage img2 = Util.toBufferedImage("2.jpg");
+        BufferedImage img1 = Util.toBufferedImage("2.jpg");
 
-        // 眼镜检测
-        boolean res1 = QsFaceEngine.detectGlasses(handler, Util.toBytes(img1), img1.getWidth(), img1.getHeight(), img1.getWidth() * 3);
-        boolean res2 = QsFaceEngine.detectGlasses(handler, Util.toBytes(img2), img2.getWidth(), img2.getHeight(), img2.getWidth() * 3);
-        System.out.println(res1 + " || " + res2);
+        QsFace[] faces = new QsFace[1];
+        int faceNum =
+                QsFaceEngine.detectFaces(handler, Util.toBytes(img1), img1.getWidth(), img1.getHeight(), img1.getWidth() * 3, faces, 1);
+        // 判断是否戴眼镜
+        if (faceNum > 0) {
+            boolean res1 = QsFaceEngine.detectGlasses(handler, Util.toBytes(img1), img1.getWidth(), img1.getHeight(), img1.getWidth() * 3,
+                    faces[0].rect);
+            System.out.println(res1);
+        }
     }
 
 
