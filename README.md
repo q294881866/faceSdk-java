@@ -37,4 +37,4 @@ Q：sdk是离线的还是基于云服务通过http调用的。
 A: 离线的，不需要联网，直接在本地计算 
 
 ## C++ SDK 下载连接
-https://share.weiyun.com/e41b3a527ccafea4a00fdb64e505588a
+https://pan.baidu.com/s/1iQ4HjVYkix0Z8hahonxugQ  
