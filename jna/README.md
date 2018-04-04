@@ -11,8 +11,8 @@
 * 将dll目录文件加到当前工程根目录，或者其它能加载到dll文件的目录
 * license文件保存在 JAVA\_HOME\bin （32bit）目录下，即可执行文件java（.exe）同一目录
 * 将dll目录下java\_32\_bin目录文件，放到执行本示例的32位java.exe对应目录(./bin)
-* ./haarcascades 文件夹是检测眼镜的模型文件
-* ./jar 文件夹提供了直接可以导入的jar，
+* [haarcascades](./haarcascades) 文件夹是检测眼镜的模型文件
+* [jar](./jar) 文件夹提供了直接可以导入的jar，
   - QsFace4Java-1.0.1-jar-with-dependencies.jar 包含了所有依赖的jar
   - QsFace4Java-1.0.1.jar 只包含源码
 * demo Test
