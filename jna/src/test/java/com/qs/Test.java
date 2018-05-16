@@ -52,10 +52,10 @@ public class Test {
         QsFace[] face1 = new QsFace[1];
         QsFace[] face2 = new QsFace[1];
         int facenum1 =
-                QsFaceEngine.detectFaces(handler, Util.toBytes(img1), img1.getWidth(), img1.getHeight(), img1.getWidth() * 3, face1, 1);
+                QsFaceEngine.detectFacesV2(handler, Util.toBytes(img1), img1.getWidth(), img1.getHeight(), img1.getWidth() * 3, face1, 1);
         System.out.println("facenum1:" + facenum1);
         int facenum2 =
-                QsFaceEngine.detectFaces(handler, Util.toBytes(img2), img2.getWidth(), img2.getHeight(), img2.getWidth() * 3, face2, 1);
+                QsFaceEngine.detectFacesV2(handler, Util.toBytes(img2), img2.getWidth(), img2.getHeight(), img2.getWidth() * 3, face2, 1);
         System.out.println("facenum2:" + facenum2);
 
         // 转为C/C++指针类型格式
