@@ -92,7 +92,7 @@ public class QsFaceEngine {
         // 检测人脸
         QsFace[] faces = new QsFace[maxFaceNum];
         QsFace.ByReference[] models = new QsFace.ByReference[maxFaceNum];
-        int faceNum = INSTANCE.qs_Wis_DetectFaces(handler, imgBuff, width, height, widthstep, faces, maxFaceNum);
+        int faceNum = INSTANCE.qs_Wis_DetectFacesV2(handler, imgBuff, width, height, widthstep, faces, maxFaceNum);
         if (faceNum < 1) return null;
 
         // 提取特征
