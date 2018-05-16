@@ -118,7 +118,7 @@ public class Test {
 
         QsFace[] faces = new QsFace[1];
         int faceNum =
-                QsFaceEngine.detectFaces(handler, Util.toBytes(img1), img1.getWidth(), img1.getHeight(), img1.getWidth() * 3, faces, 1);
+                QsFaceEngine.detectFacesV2(handler, Util.toBytes(img1), img1.getWidth(), img1.getHeight(), img1.getWidth() * 3, faces, 1);
         // 判断是否戴眼镜
         if (faceNum > 0) {
             boolean res1 = QsFaceEngine.detectGlasses(handler, Util.toBytes(img1), img1.getWidth(), img1.getHeight(), img1.getWidth() * 3,
@@ -138,7 +138,7 @@ public class Test {
         // 人脸检测
         QsFace[] face1 = new QsFace[1];
         int facenum =
-                QsFaceEngine.detectFaces(handler, Util.toBytes(img1), img1.getWidth(), img1.getHeight(), img1.getWidth() * 3, face1, 1);
+                QsFaceEngine.detectFacesV2(handler, Util.toBytes(img1), img1.getWidth(), img1.getHeight(), img1.getWidth() * 3, face1, 1);
         System.out.println("facenum:" + facenum);
     }
 
