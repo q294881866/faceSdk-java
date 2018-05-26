@@ -37,4 +37,8 @@ Q：sdk是离线的还是基于云服务通过http调用的。
 A: 离线的，不需要联网，直接在本地计算 
 
 ## C++ SDK 下载连接
-baidu网盘： [libwisfaceV5.0.0-20180526-Win-x86_32_x86_64-License.zip](https://pan.baidu.com/s/1cSk2AthxxA3T7Uum2_G8kA )
+baidu网盘： [libwisfaceV5.0.0-20180526-Win-x86_32_x86_64-License.zip](https://pan.baidu.com/s/1cSk2AthxxA3T7Uum2_G8kA )  
+
+[#人脸识别软件下载地址](http://qiansou.cn/home/productinfo.html)
+
+
