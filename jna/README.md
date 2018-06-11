@@ -16,6 +16,7 @@
 * [jar](./jar) 文件夹提供了直接可以导入的jar，
    *  QsFace4Java-1.0.1-jar-with-dependencies.jar 包含了所有依赖的jar
    *  QsFace4Java-1.0.1.jar 只包含源码
+* 源码需要手动引入opencv-310.jar
 * demo Test
 
 > 注意
@@ -23,4 +24,5 @@
 1. dll目录文件,在x86\_32或者x86\_64目录
 2. 64位版本同32位操作不过放到相应的64位执行环境下，注意切换不同的jdk
 3. 建议直接将将[32](./x86_32)或者[64](./x86_64)目录下所有文件 以及license放到java/bin目录下。
+4. try{}catch(Throwable a){} 异常处理需要是Throwable（灰色图片）
 

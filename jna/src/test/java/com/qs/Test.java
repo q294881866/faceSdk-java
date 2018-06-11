@@ -12,7 +12,6 @@ import com.qs.QsFaceEngine.QsFace.ByReference;
 
 public class Test {
 
-
     /**
      * 图片比较
      */
@@ -25,6 +24,7 @@ public class Test {
         System.err.println(System.currentTimeMillis() - begin);
         System.out.println("图片比较:" + score);
     }
+
 
     /**
      * 标准比较API，基于字节流
@@ -49,27 +49,36 @@ public class Test {
         BufferedImage img2 = Util.toBufferedImage("2.jpg");
 
         // 3.人脸检测
-        QsFace[] face1 = new QsFace[1];
-        QsFace[] face2 = new QsFace[1];
-        int facenum1 =
-                QsFaceEngine.detectFacesV2(handler, Util.toBytes(img1), img1.getWidth(), img1.getHeight(), img1.getWidth() * 3, face1, 1);
-        System.out.println("facenum1:" + facenum1);
-        int facenum2 =
-                QsFaceEngine.detectFacesV2(handler, Util.toBytes(img2), img2.getWidth(), img2.getHeight(), img2.getWidth() * 3, face2, 1);
-        System.out.println("facenum2:" + facenum2);
+        try {
+            QsFace[] face1 = new QsFace[1];
+            QsFace[] face2 = new QsFace[1];
+            int facenum1 = QsFaceEngine.detectFacesV2(handler, Util.toBytes(img1), img1.getWidth(),
+                img1.getHeight(), img1.getWidth() * 3, face1, 1);
+            System.out.println("facenum1:" + facenum1);
+            int facenum2 = QsFaceEngine.detectFacesV2(handler, Util.toBytes(img2), img2.getWidth(),
+                img2.getHeight(), img2.getWidth() * 3, face2, 1);
+            System.out.println("facenum2:" + facenum2);
 
-        // 转为C/C++指针类型格式
-        ByReference f1 = face1[0].asReference();
-        ByReference f2 = face2[0].asReference();
+            // 转为C/C++指针类型格式
+            ByReference f1 = face1[0].asReference();
+            ByReference f2 = face2[0].asReference();
 
-        // 4.提取特征并比较：这里比较两张照片，并且都只有一张脸，多个做 for 循环
-        QsFaceEngine.extractFeature(handler, Util.toBytes(img1), img1.getWidth(), img1.getHeight(), img1.getWidth() * 3, f1);
-        QsFaceEngine.extractFeature(handler, Util.toBytes(img2), img2.getWidth(), img2.getHeight(), img2.getWidth() * 3, f2);
-        float score = QsFaceEngine.compare2Feature(handler, f1.feature, f2.feature);
-        System.out.println("特征比较:" + score);
+            // 4.提取特征并比较：这里比较两张照片，并且都只有一张脸，多个做 for 循环
+            QsFaceEngine.extractFeature(handler, Util.toBytes(img1), img1.getWidth(), img1.getHeight(),
+                img1.getWidth() * 3, f1);
+            QsFaceEngine.extractFeature(handler, Util.toBytes(img2), img2.getWidth(), img2.getHeight(),
+                img2.getWidth() * 3, f2);
+            float score = QsFaceEngine.compare2Feature(handler, f1.feature, f2.feature);
+            System.out.println("特征比较:" + score);
+        }
+        catch (Throwable e) {
+            // TODO: handle exception 必须是 Throwable
+            System.err.println(e);
+        }
         System.err.println(System.currentTimeMillis() - begin);
 
     }
+
 
     /**
      * 简化标准比较API，基于字节流
@@ -90,10 +99,9 @@ public class Test {
 
         // 3.人脸检测
         QsFace.ByReference[] face1 = QsFaceEngine.detectFaceAndFeature(//
-                handler, Util.toBytes(img1), img1.getWidth(), img1.getHeight(), img1.getWidth() * 3, 1);
+            handler, Util.toBytes(img1), img1.getWidth(), img1.getHeight(), img1.getWidth() * 3, 1);
         QsFace.ByReference[] face2 = QsFaceEngine.detectFaceAndFeature(//
-                handler, Util.toBytes(img2), img2.getWidth(), img2.getHeight(), img2.getWidth() * 3, 1);
-
+            handler, Util.toBytes(img2), img2.getWidth(), img2.getHeight(), img2.getWidth() * 3, 1);
 
         // 4.特征并比较
         for (int i = 0; i < face1.length; i++) {
@@ -108,6 +116,7 @@ public class Test {
 
     }
 
+
     @org.junit.Test
     public void glassesTest() throws Exception {
         long prem = Runtime.getRuntime().freeMemory();
@@ -117,30 +126,17 @@ public class Test {
         BufferedImage img1 = Util.toBufferedImage("2.jpg");
 
         QsFace[] faces = new QsFace[1];
-        int faceNum =
-                QsFaceEngine.detectFacesV2(handler, Util.toBytes(img1), img1.getWidth(), img1.getHeight(), img1.getWidth() * 3, faces, 1);
+        int faceNum = QsFaceEngine.detectFacesV2(handler, Util.toBytes(img1), img1.getWidth(),
+            img1.getHeight(), img1.getWidth() * 3, faces, 1);
         // 判断是否戴眼镜
         if (faceNum > 0) {
-            boolean res1 = QsFaceEngine.detectGlasses(handler, Util.toBytes(img1), img1.getWidth(), img1.getHeight(), img1.getWidth() * 3,
-                    faces[0].rect);
+            boolean res1 = QsFaceEngine.detectGlasses(handler, Util.toBytes(img1), img1.getWidth(),
+                img1.getHeight(), img1.getWidth() * 3, faces[0].rect);
             System.out.println(res1);
         }
 
         long lastm = Runtime.getRuntime().freeMemory();
         System.out.println("memory:" + (lastm - prem));
     }
-
-    @org.junit.Test
-    public void otherAPITest() throws Exception {
-        long handler = QsFaceEngine.create();
-        BufferedImage img1 = Util.toBufferedImage("3.jpg");
-
-        // 人脸检测
-        QsFace[] face1 = new QsFace[1];
-        int facenum =
-                QsFaceEngine.detectFacesV2(handler, Util.toBytes(img1), img1.getWidth(), img1.getHeight(), img1.getWidth() * 3, face1, 1);
-        System.out.println("facenum:" + facenum);
-    }
-
 
 }
