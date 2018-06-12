@@ -151,7 +151,7 @@ public class QsFaceEngine {
      * @param face 人脸结构体，调用特征提取之前就已经有了rect即人脸框，执行特征提取成功后，该人脸的特征值会自动存储于face.feature中
      * @return 0 success, 其他失败
      */
-    public static int extractFeature(long handler, byte[] imgBuff, int width, int height, int widthstep, QsFace.ByReference face) {
+    public static int extractFeature(long handler, byte[] imgBuff, int width, int height, int widthstep, QsFace face) {
         return INSTANCE.qs_Wis_ExtractFeature(handler, imgBuff, width, height, widthstep, face);
     }
 
@@ -244,7 +244,7 @@ public class QsFaceEngine {
         public byte[] ptFeature;
     }
 
-    public static final int FEATURE_SIZE = 512;
+    public static final int FEATURE_SIZE = 512*4;
 
     public static class QsFace extends DefaultStruct {
         public QsRect rect;
@@ -287,7 +287,7 @@ public class QsFaceEngine {
         int qs_Wis_DetectFaces_Reinforce(long handler, byte[] imgBuff, int width, int height, int widthstep, QsFace[] faces, int maxCount);
 
 
-        int qs_Wis_ExtractFeature(long handler, byte[] imgBuff, int width, int height, int widthstep, QsFace.ByReference face);
+        int qs_Wis_ExtractFeature(long handler, byte[] imgBuff, int width, int height, int widthstep, QsFace face);
 
 
         float qs_Wis_Compare2Feature(long handler, byte[] ptFeature1, byte[] ptFeature2);
