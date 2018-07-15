@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.qs</groupId>
 	<artifactId>QsFace4Java</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 
 
 	<properties>
@@ -22,11 +22,6 @@
 			<artifactId>jna-platform</artifactId>
 			<version>${jna.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.opencv</groupId>
-			<artifactId>310</artifactId>
-			<version>1.0</version>
-		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -34,8 +29,13 @@
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.opencv</groupId>
+			<artifactId>310</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
-
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -58,4 +58,5 @@
 			</plugin>
 		</plugins>
 	</build>
+	
 </project>

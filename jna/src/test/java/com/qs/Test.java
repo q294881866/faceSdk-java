@@ -45,8 +45,8 @@ public class Test {
         System.out.println(handler);
 
         // 2.读取picture字节流image
-        BufferedImage img1 = Util.toBufferedImage("1.jpg");
-        BufferedImage img2 = Util.toBufferedImage("2.jpg");
+        BufferedImage img1 = Util.toBufferedImage("5.png");
+        BufferedImage img2 = Util.toBufferedImage("4.png");
 
         // 3.人脸检测
         try {
