@@ -25,4 +25,8 @@
 2. 64位版本同32位操作不过放到相应的64位执行环境下，注意切换不同的jdk
 3. 建议直接将将[32](./x86_32)或者[64](./x86_64)目录下所有文件 以及license放到java/bin目录下。
 4. try{}catch(Throwable a){} 异常处理需要是Throwable（灰色图片）
+5. 生产发布须知
+   *  二次打包确认依赖引入，对一下引入的class目录：OpenCV、qiansou
+   *  相关的[dll](./x86_32)目录下所有文件和[haarcascades](./haarcascades) 文件夹也需要加入
+   *  总之要跟开发环境一样，此版本仅支持windows平台
 
